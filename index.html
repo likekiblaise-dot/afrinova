@@ -1244,28 +1244,14 @@ const year = document.getElementById("year");
 if (year) year.textContent = new Date().getFullYear();
 
 function sendAfriNovaEnquiry(event, enquiryType) {
-  event.preventDefault();
+    event.preventDefault();
 
-  if (AFRINOVA_CONTACT_EMAIL === "YOUR-EMAIL@example.com") {
-    alert("AfriNova's contact email has not been configured yet. We will set it before launch.");
-    return;
-  }
-
-  const form = event.target;
-  const data = new FormData(form);
-  const lines = [];
-
-  for (const [key, value] of data.entries()) {
-    lines.push(key + ": " + value);
-  }
-
-  const subject = "AfriNova - " + enquiryType;
-  const body = lines.join("\n");
-  const mailto = "mailto:" + AFRINOVA_CONTACT_EMAIL
-    + "?subject=" + encodeURIComponent(subject)
-    + "&body=" + encodeURIComponent(body);
-
-  window.location.href = mailto;
+    alert(
+        "Thank you for your interest in AfriNova. " +
+        "Our online enquiry service is still being prepared, " +
+        "so your information has not been sent or saved. " +
+        "Please check back when our official contact channels are announced."
+    );
 }
 </script>
 
