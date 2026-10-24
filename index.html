@@ -330,6 +330,56 @@ footer { padding: 28px 6%; border-top: 1px solid #304032; color: var(--muted); f
   .afn-detail-panel { padding: 18px; }
 }
 
+
+/* AFRINOVA 3.0 PERSONALISATION */
+.afn-personal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+.afn-personal-card {
+  background: var(--panel, #172019);
+  border: 1px solid #39483a;
+  border-radius: 12px;
+  padding: 16px;
+  min-width: 0;
+}
+.afn-personal-card h3 {
+  font-size: 16px;
+  margin: 0 0 6px;
+}
+.afn-personal-card p {
+  color: var(--muted, #b6c0b4);
+  font-size: 13px;
+  margin: 0 0 12px;
+}
+.afn-personal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.afn-favourite-button {
+  display: inline-block;
+  padding: 8px 12px;
+  border: 1px solid #526a43;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--text, #f7f7f0);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+}
+.afn-favourite-button[aria-pressed="true"] {
+  background: var(--green, #b8e986);
+  color: #14200f;
+}
+.afn-empty-message {
+  color: var(--muted, #b6c0b4);
+  font-size: 14px;
+}
+
 </style>
 </head>
 <body>
@@ -604,6 +654,36 @@ footer { padding: 28px 6%; border-top: 1px solid #304032; color: var(--muted); f
   </div>
 </section>
 <!-- AFRINOVA 2.0 FEATURED CONTENT END -->
+
+
+<!-- AFRINOVA 3.0 PERSONALISATION START -->
+<section id="my-afrinova" class="section">
+  <div class="section-heading">
+    <div>
+      <p class="muted">YOUR PERSONAL SPACE</p>
+      <h2>My AfriNova</h2>
+      <p class="muted">Save programmes you like and revisit entertainment you've explored.</p>
+    </div>
+  </div>
+  <div class="afn-personal-grid">
+    <div class="afn-personal-card">
+      <h3>❤️ My List</h3>
+      <p>Your saved programmes appear here in this browser.</p>
+      <div id="afn-favourites-list" aria-live="polite">
+        <p class="afn-empty-message">Your list will appear here when you save a programme.</p>
+      </div>
+    </div>
+    <div class="afn-personal-card">
+      <h3>🕘 Recently Viewed</h3>
+      <p>Quickly return to programmes you've explored.</p>
+      <div id="afn-recent-list" aria-live="polite">
+        <p class="afn-empty-message">Programmes you explore will appear here.</p>
+      </div>
+    </div>
+  </div>
+  <p class="muted" style="font-size:12px;margin-top:14px">Your list is stored locally in this browser. It does not synchronise between devices.</p>
+</section>
+<!-- AFRINOVA 3.0 PERSONALISATION END -->
 
 <section id="about">
     <h2>Our Vision</h2>
@@ -940,6 +1020,189 @@ function sendAfriNovaEnquiry(event, enquiryType) {
   document.addEventListener("keydown", function (event) {
     if (event.key === "Escape") window.afnCloseDetails();
   });
+})();
+</script>
+
+
+<script>
+(function () {
+  "use strict";
+
+  const FAV_KEY = "afrinova_favourites_v1";
+  const RECENT_KEY = "afrinova_recent_v1";
+
+  function readList(key) {
+    try {
+      const value = JSON.parse(localStorage.getItem(key) || "[]");
+      return Array.isArray(value) ? value.filter(
+        item => item && typeof item.title === "string"
+      ) : [];
+    } catch (error) {
+      return [];
+    }
+  }
+
+  function writeList(key, items) {
+    try {
+      localStorage.setItem(key, JSON.stringify(items));
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function getCardInfo(card) {
+    const heading = card.querySelector("h3, h2");
+    if (!heading) return null;
+
+    const title = heading.textContent.trim();
+    if (!title) return null;
+
+    const description = card.querySelector("p");
+    const category = card.querySelector(".label, .afn-feature-tag");
+
+    return {
+      title: title.slice(0, 180),
+      description: description ? description.textContent.trim().slice(0, 400) : "",
+      category: category ? category.textContent.trim().slice(0, 80) : "Entertainment"
+    };
+  }
+
+  function makeEntry(item, listType) {
+    const article = document.createElement("article");
+    article.className = "afn-personal-card";
+
+    const title = document.createElement("h3");
+    title.textContent = item.title;
+    article.appendChild(title);
+
+    const category = document.createElement("p");
+    category.textContent = item.category || "Entertainment";
+    article.appendChild(category);
+
+    if (item.description) {
+      const desc = document.createElement("p");
+      desc.textContent = item.description;
+      article.appendChild(desc);
+    }
+
+    const actions = document.createElement("div");
+    actions.className = "afn-personal-actions";
+
+    const remove = document.createElement("button");
+    remove.type = "button";
+    remove.className = "afn-favourite-button";
+    remove.textContent = listType === "favourites" ? "Remove from My List" : "Remove history";
+    remove.addEventListener("click", function () {
+      const key = listType === "favourites" ? FAV_KEY : RECENT_KEY;
+      const next = readList(key).filter(entry => entry.title !== item.title);
+      writeList(key, next);
+      renderLists();
+      updateButtons();
+    });
+
+    actions.appendChild(remove);
+    article.appendChild(actions);
+    return article;
+  }
+
+  function renderOneList(elementId, key, type, emptyText) {
+    const container = document.getElementById(elementId);
+    if (!container) return;
+
+    container.replaceChildren();
+    const items = readList(key);
+
+    if (!items.length) {
+      const empty = document.createElement("p");
+      empty.className = "afn-empty-message";
+      empty.textContent = emptyText;
+      container.appendChild(empty);
+      return;
+    }
+
+    items.forEach(item => container.appendChild(makeEntry(item, type)));
+  }
+
+  function renderLists() {
+    renderOneList("afn-favourites-list", FAV_KEY, "favourites",
+      "Your list is empty. Use Save to My List on a programme card.");
+    renderOneList("afn-recent-list", RECENT_KEY, "recent",
+      "Nothing viewed yet. Explore a programme to start your history.");
+  }
+
+  function updateButtons() {
+    const favourites = readList(FAV_KEY);
+    document.querySelectorAll("[data-afn-favourite]").forEach(button => {
+      const title = button.getAttribute("data-afn-favourite");
+      const saved = favourites.some(item => item.title === title);
+      button.setAttribute("aria-pressed", String(saved));
+      button.textContent = saved ? "♥ Saved to My List" : "♡ Save to My List";
+    });
+  }
+
+  function enhanceCards() {
+    document.querySelectorAll(".card, .afn-feature-card").forEach(card => {
+      const info = getCardInfo(card);
+      if (!info || card.querySelector(".afn-favourite-button")) return;
+
+      const target = card.querySelector(".card-content, .afn-feature-body") || card;
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "afn-favourite-button";
+      button.setAttribute("data-afn-favourite", info.title);
+      button.setAttribute("aria-pressed", "false");
+      button.textContent = "♡ Save to My List";
+
+      button.addEventListener("click", function (event) {
+        event.stopPropagation();
+        const items = readList(FAV_KEY);
+        const index = items.findIndex(item => item.title === info.title);
+
+        if (index >= 0) {
+          items.splice(index, 1);
+        } else {
+          items.unshift(info);
+        }
+
+        writeList(FAV_KEY, items.slice(0, 100));
+        renderLists();
+        updateButtons();
+      });
+
+      target.appendChild(button);
+    });
+
+    updateButtons();
+  }
+
+  function recordRecent(card) {
+    const info = getCardInfo(card);
+    if (!info) return;
+
+    const items = readList(RECENT_KEY).filter(item => item.title !== info.title);
+    items.unshift(info);
+    writeList(RECENT_KEY, items.slice(0, 12));
+    renderLists();
+  }
+
+  document.addEventListener("click", function (event) {
+    if (event.target.closest(".afn-favourite-button")) return;
+
+    const card = event.target.closest(".card, .afn-feature-card");
+    if (card) recordRecent(card);
+  });
+
+  function start() {
+    enhanceCards();
+    renderLists();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", start);
+  } else {
+    start();
+  }
 })();
 </script>
 
