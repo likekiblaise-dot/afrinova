@@ -209,6 +209,43 @@ footer { padding: 28px 6%; border-top: 1px solid #304032; color: var(--muted); f
       opacity: 0.75;
     }
     
+
+.collection-modal[hidden] { display: none !important; }
+.collection-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.78);
+}
+.collection-box {
+  position: relative;
+  width: min(100%, 520px);
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 30px;
+  border: 1px solid rgba(190, 255, 96, 0.35);
+  border-radius: 22px;
+  background: #17251d;
+  color: #fff;
+}
+.collection-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 30px;
+  cursor: pointer;
+}
+.collection-icon { font-size: 44px; margin-bottom: 12px; }
+.card .button { font: inherit; cursor: pointer; border: 0; }
+.card-content .button { margin-top: 14px; }
+
 </style>
 </head>
 <body>
@@ -254,29 +291,91 @@ footer { padding: 28px 6%; border-top: 1px solid #304032; color: var(--muted); f
       <button class="chip" data-category="Documentaries">Documentaries</button>
     </div>
 
-    <div class="grid" id="catalogue">
-      <article class="card" data-category="Movies">
-        <div class="art">🎬</div>
-        <div class="card-content"><span class="label">Movies</span><h3>African Cinema</h3><p>Discover films and stories from across Africa.</p></div>
-      </article>
-      <article class="card" data-category="Series">
-        <div class="art">📺</div>
-        <div class="card-content"><span class="label">Series</span><h3>Stories in Episodes</h3><p>Explore drama, family stories and original series.</p></div>
-      </article>
-      <article class="card" data-category="Comedy">
-        <div class="art">😂</div>
-        <div class="card-content"><span class="label">Comedy</span><h3>African Laughter</h3><p>Comedy sketches, performances and funny stories.</p></div>
-      </article>
-      <article class="card" data-category="Music">
-        <div class="art">🎵</div>
-        <div class="card-content"><span class="label">Music</span><h3>Music & Performances</h3><p>Discover artists, live shows and music stories.</p></div>
-      </article>
-      <article class="card" data-category="Documentaries">
-        <div class="art">🌍</div>
-        <div class="card-content"><span class="label">Documentaries</span><h3>Real African Stories</h3><p>Explore culture, history, innovation and people.</p></div>
-      </article>
+    
+<div class="grid" id="catalogue">
+
+  <article class="card" data-category="Movies">
+    <div class="art">🎬</div>
+    <div class="card-content">
+      <span class="label">Movies</span>
+      <h3>African Cinema</h3>
+      <p>Discover films, powerful performances, and stories from across Africa.</p>
+      <button class="button button-primary" type="button"
+        onclick="showCollection('Movies')">Explore Collection</button>
     </div>
-    <div class="notice">AfriNova is under development. These are category previews, not playable programmes. We will add videos when suitable content and distribution permissions are secured.</div>
+  </article>
+
+  <article class="card" data-category="Series">
+    <div class="art">📺</div>
+    <div class="card-content">
+      <span class="label">Series</span>
+      <h3>Stories in Episodes</h3>
+      <p>Explore drama, family stories, and original series from African creators.</p>
+      <button class="button button-primary" type="button"
+        onclick="showCollection('Series')">Explore Collection</button>
+    </div>
+  </article>
+
+  <article class="card" data-category="Comedy">
+    <div class="art">😂</div>
+    <div class="card-content">
+      <span class="label">Comedy</span>
+      <h3>African Laughter</h3>
+      <p>Enjoy comedy sketches, performances, and humorous stories.</p>
+      <button class="button button-primary" type="button"
+        onclick="showCollection('Comedy')">Explore Collection</button>
+    </div>
+  </article>
+
+  <article class="card" data-category="Music">
+    <div class="art">🎵</div>
+    <div class="card-content">
+      <span class="label">Music</span>
+      <h3>Music & Performances</h3>
+      <p>Discover African artists, live performances, and music stories.</p>
+      <button class="button button-primary" type="button"
+        onclick="showCollection('Music')">Explore Collection</button>
+    </div>
+  </article>
+
+  <article class="card" data-category="Documentaries">
+    <div class="art">🌍</div>
+    <div class="card-content">
+      <span class="label">Documentaries</span>
+      <h3>Real African Stories</h3>
+      <p>Explore African culture, history, innovation, nature, and people.</p>
+      <button class="button button-primary" type="button"
+        onclick="showCollection('Documentaries')">Explore Collection</button>
+    </div>
+  </article>
+
+</div>
+
+<div class="notice">
+  AfriNova is under development. These categories are previews, not playable
+  programmes. Videos will be added as suitable content and distribution
+  permissions are secured.
+</div>
+
+<div id="collection-modal" class="collection-modal"
+     role="dialog" aria-modal="true" aria-labelledby="collection-title"
+     hidden>
+  <div class="collection-box">
+    <button type="button" class="collection-close"
+      onclick="closeCollection()" aria-label="Close preview">×</button>
+    <div class="collection-icon" id="collection-icon">🎬</div>
+    <p class="eyebrow">AFRINOVA COLLECTION</p>
+    <h2 id="collection-title">Explore AfriNova</h2>
+    <p id="collection-description"></p>
+    <div class="notice">
+      This collection is being prepared. Featured titles and authorised
+      viewing options will appear here as they become available.
+    </div>
+    <button type="button" class="button button-primary"
+      onclick="closeCollection()">Back to Explore</button>
+  </div>
+</div>
+
   </section>
 
   <section id="creators">
@@ -495,51 +594,106 @@ footer { padding: 28px 6%; border-top: 1px solid #304032; color: var(--muted); f
 </footer>
 
 <script>
-const buttons = document.querySelectorAll('.chip');
-const cards = document.querySelectorAll('.card');
-const search = document.getElementById('search');
-let activeCategory = 'All';
+const AFRINOVA_CONTACT_EMAIL = "YOUR-EMAIL@example.com";
+
+const collectionInfo = {
+  Movies: {
+    icon: "🎬",
+    description: "Discover African films, cinema, and powerful stories from across the continent."
+  },
+  Series: {
+    icon: "📺",
+    description: "Explore episodic drama, family stories, and series from African storytellers."
+  },
+  Comedy: {
+    icon: "😂",
+    description: "Find comedy sketches, funny performances, and entertaining African humour."
+  },
+  Music: {
+    icon: "🎵",
+    description: "Discover artists, performances, and music stories from across Africa."
+  },
+  Documentaries: {
+    icon: "🌍",
+    description: "Explore documentaries about African culture, history, people, and innovation."
+  }
+};
+
+function showCollection(category) {
+  const info = collectionInfo[category];
+  if (!info) return;
+
+  document.getElementById("collection-title").textContent = category;
+  document.getElementById("collection-icon").textContent = info.icon;
+  document.getElementById("collection-description").textContent = info.description;
+
+  const modal = document.getElementById("collection-modal");
+  modal.hidden = false;
+  document.body.style.overflow = "hidden";
+  modal.querySelector(".collection-close").focus();
+}
+
+function closeCollection() {
+  document.getElementById("collection-modal").hidden = true;
+  document.body.style.overflow = "";
+}
+
+document.getElementById("collection-modal").addEventListener("click", function(event) {
+  if (event.target === this) closeCollection();
+});
+
+document.addEventListener("keydown", function(event) {
+  if (event.key === "Escape") closeCollection();
+});
+
+const buttons = document.querySelectorAll(".chip");
+const cards = document.querySelectorAll("#catalogue .card");
+const search = document.getElementById("search");
+let activeCategory = "All";
 
 function filterCards() {
-  const query = search.value.toLowerCase().trim();
+  const query = search ? search.value.toLowerCase().trim() : "";
   let visible = 0;
-  cards.forEach(card => {
+
+  cards.forEach(function(card) {
     const category = card.dataset.category;
-    const matchesCategory = activeCategory === 'All' || category === activeCategory;
+    const matchesCategory = activeCategory === "All" || category === activeCategory;
     const matchesSearch = card.textContent.toLowerCase().includes(query);
     const show = matchesCategory && matchesSearch;
-    card.style.display = show ? '' : 'none';
+
+    card.style.display = show ? "" : "none";
     if (show) visible++;
   });
-  let empty = document.getElementById('empty-message');
+
+  let empty = document.getElementById("empty-message");
   if (!empty) {
-    empty = document.createElement('p');
-    empty.id = 'empty-message';
-    empty.className = 'empty';
-    document.getElementById('catalogue').after(empty);
+    empty = document.createElement("p");
+    empty.id = "empty-message";
+    empty.className = "empty";
+    document.getElementById("catalogue").after(empty);
   }
-  empty.textContent = visible ? '' : 'No categories found. Try another search.';
+  empty.textContent = visible ? "" : "No categories found. Try another search.";
 }
-buttons.forEach(button => {
-  button.addEventListener('click', () => {
-    buttons.forEach(item => item.classList.remove('active'));
-    button.classList.add('active');
+
+buttons.forEach(function(button) {
+  button.addEventListener("click", function() {
+    buttons.forEach(function(item) { item.classList.remove("active"); });
+    button.classList.add("active");
     activeCategory = button.dataset.category;
     filterCards();
   });
 });
-search.addEventListener('input', filterCards);
-document.getElementById('year').textContent = new Date().getFullYear();
-</script>
 
-    <script>
-const AFRINOVA_CONTACT_EMAIL = "YOUR-EMAIL@example.com";
+if (search) search.addEventListener("input", filterCards);
+
+const year = document.getElementById("year");
+if (year) year.textContent = new Date().getFullYear();
 
 function sendAfriNovaEnquiry(event, enquiryType) {
   event.preventDefault();
 
   if (AFRINOVA_CONTACT_EMAIL === "YOUR-EMAIL@example.com") {
-    alert("AfriNova's contact email has not been configured yet. Please check back soon.");
+    alert("AfriNova's contact email has not been configured yet. We will set it before launch.");
     return;
   }
 
