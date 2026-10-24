@@ -381,8 +381,104 @@ footer { padding: 28px 6%; border-top: 1px solid #304032; color: var(--muted); f
 }
 
 </style>
+<style>
+
+/* AfriNova 4.5 sidebar */
+.afn-menu-trigger{position:fixed;z-index:10020;top:16px;left:16px;width:48px;height:48px;border:1px solid rgba(255,255,255,.2);border-radius:14px;background:#14251d;color:#d4ff81;font-size:25px;cursor:pointer;box-shadow:0 6px 24px #0004}
+.afn-side-backdrop{position:fixed;inset:0;z-index:10029;background:rgba(0,0,0,.62);opacity:0;visibility:hidden;transition:opacity .22s,visibility .22s}
+.afn-side-backdrop.afn-open{opacity:1;visibility:visible}
+.afn-sidebar{position:fixed;z-index:10030;inset:0 auto 0 0;width:min(340px,88vw);overflow-y:auto;background:#102119;color:#f5f8f3;border-right:1px solid rgba(255,255,255,.12);padding:22px 18px 30px;transform:translateX(-105%);transition:transform .25s ease;box-shadow:12px 0 40px #0004}
+.afn-sidebar.afn-open{transform:translateX(0)}
+.afn-side-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 4px 22px;border-bottom:1px solid rgba(255,255,255,.12)}
+.afn-side-brand{font-size:23px;font-weight:850;letter-spacing:.5px;color:#d4ff81}
+.afn-side-subtitle{font-size:12px;opacity:.72;margin-top:5px}
+.afn-side-close{width:40px;height:40px;border:0;border-radius:12px;background:rgba(255,255,255,.09);color:white;font-size:25px;cursor:pointer}
+.afn-side-group{padding:17px 0 5px}
+.afn-side-heading{margin:0 0 9px 9px;font-size:10px;letter-spacing:1.7px;font-weight:800;opacity:.58}
+.afn-side-link{display:flex;align-items:center;gap:12px;padding:12px 10px;border-radius:11px;color:inherit;text-decoration:none;font-size:14px;transition:background .15s,color .15s}
+.afn-side-link:hover,.afn-side-link:focus-visible{background:rgba(212,255,129,.12);color:#d4ff81;outline:none}
+.afn-side-icon{width:24px;text-align:center;color:#d4ff81;font-size:18px}
+.afn-side-footer{margin-top:20px;padding:15px 10px;border-top:1px solid rgba(255,255,255,.12);font-size:12px;line-height:1.6;opacity:.7}
+body.afn-sidebar-active{overflow:hidden}
+@media(max-width:600px){.afn-menu-trigger{top:12px;left:12px;width:44px;height:44px}.afn-sidebar{padding:17px 15px 25px}}
+@media(prefers-reduced-motion:reduce){.afn-sidebar,.afn-side-backdrop{transition:none}}
+
+</style>
+<style>
+
+/* AfriNova frontend finishing polish */
+.afn-about-wrap{max-width:1080px;margin:0 auto}
+.afn-about-lead{font-size:clamp(1.2rem,2.8vw,1.8rem);line-height:1.5;max-width:760px;margin:16px 0 32px}
+.afn-about-intro{margin:30px 0;max-width:920px;line-height:1.85}
+.afn-about-intro h3,.afn-about-cta h3{font-size:clamp(1.35rem,2.5vw,1.8rem);margin-bottom:12px}
+.afn-about-intro p{line-height:1.85}
+.afn-about-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin:30px 0}
+.afn-about-card{padding:23px;border:1px solid rgba(255,255,255,.13);border-radius:18px;background:rgba(255,255,255,.035)}
+.afn-about-card h3{margin:12px 0}
+.afn-about-card p,.afn-about-values p{line-height:1.75}
+.afn-about-number{font-size:12px;letter-spacing:2px;color:#c7f36b;font-weight:800}
+.afn-about-values{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.afn-about-values>div{padding:16px;border-left:2px solid #c7f36b;background:rgba(255,255,255,.025)}
+.afn-about-values p{margin:7px 0 0}
+.afn-about-cta{margin:36px 0 10px;padding:26px;border:1px solid rgba(199,243,107,.3);border-radius:20px;background:rgba(199,243,107,.055)}
+.afn-about-cta p{line-height:1.8}
+.afn-about-button{display:inline-block;padding:12px 19px;border-radius:999px;background:#c7f36b;color:#142016;text-decoration:none;font-weight:800}
+.afn-footer{margin-top:70px;padding:48px max(20px,5vw) 20px;background:#0c1913;color:#f2f6f1;border-top:1px solid rgba(255,255,255,.12)}
+.afn-footer-main{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:minmax(230px,1.5fr) repeat(3,minmax(140px,1fr));gap:32px}
+.afn-footer-logo{font-size:26px;letter-spacing:1px;font-weight:900;color:#c7f36b;text-decoration:none}
+.afn-footer-tagline{font-weight:700}
+.afn-footer-brand p{max-width:430px;line-height:1.75;opacity:.82}
+.afn-footer-motto{font-size:.9rem}
+.afn-footer-column{display:flex;flex-direction:column;gap:12px}
+.afn-footer-column h3{font-size:11px;letter-spacing:1.3px;opacity:.7;margin:5px 0 7px}
+.afn-footer-column a{color:inherit;text-decoration:none;line-height:1.5;opacity:.86}
+.afn-footer-column a:hover,.afn-footer-column a:focus-visible{color:#c7f36b;opacity:1}
+.afn-footer-bottom{max-width:1200px;margin:35px auto 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.12);font-size:12px;line-height:1.8;opacity:.7}
+.afn-scroll-track{position:fixed;z-index:10040;top:0;left:0;width:100%;height:3px;pointer-events:none}
+#afn-scroll-progress{height:100%;width:0;background:#c7f36b}
+#afn-back-to-top{position:fixed;z-index:10010;right:18px;bottom:20px;width:46px;height:46px;border:1px solid rgba(255,255,255,.2);border-radius:14px;background:#14251d;color:#c7f36b;font-size:24px;cursor:pointer;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .2s,transform .2s,visibility .2s}
+#afn-back-to-top.afn-visible{opacity:1;visibility:visible;transform:translateY(0)}
+@media(max-width:800px){.afn-footer-main{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px}.afn-footer-brand{grid-column:1/-1}}
+@media(max-width:480px){.afn-footer-main{grid-template-columns:1fr}.afn-footer-brand{grid-column:auto}.afn-footer{padding:38px 20px 18px}}
+@media(prefers-reduced-motion:reduce){#afn-back-to-top{transition:none}}
+
+</style>
 </head>
 <body>
+
+<!-- AFRINOVA 4.5 SIDEBAR START -->
+<button type="button" class="afn-menu-trigger" id="afn-menu-trigger"
+ aria-label="Open AfriNova navigation" aria-controls="afn-sidebar"
+ aria-expanded="false">☰</button>
+<div class="afn-side-backdrop" id="afn-side-backdrop"></div>
+<aside class="afn-sidebar" id="afn-sidebar" aria-label="AfriNova navigation"
+ aria-hidden="true">
+  <div class="afn-side-top">
+    <div>
+      <div class="afn-side-brand">AFRINOVA</div>
+      <div class="afn-side-subtitle">A New Era of African Entertainment</div>
+    </div>
+    <button type="button" class="afn-side-close" id="afn-side-close"
+      aria-label="Close navigation">×</button>
+  </div>
+  <div class="afn-side-group"><p class="afn-side-heading">MAIN</p><a class="afn-side-link" href="#top"><span class="afn-side-icon" aria-hidden="true">⌂</span><span>Home</span></a><a class="afn-side-link" href="#featured"><span class="afn-side-icon" aria-hidden="true">▶</span><span>Explore Entertainment</span></a><a class="afn-side-link" href="#smart-discovery"><span class="afn-side-icon" aria-hidden="true">✦</span><span>Smart Discovery</span></a><a class="afn-side-link" href="#coming-soon"><span class="afn-side-icon" aria-hidden="true">◷</span><span>Coming Soon</span></a><a class="afn-side-link" href="#my-afrinova"><span class="afn-side-icon" aria-hidden="true">♡</span><span>My AfriNova</span></a></div>
+  <div class="afn-side-group"><p class="afn-side-heading">AFRICAN CREATORS</p><a class="afn-side-link" href="#creators"><span class="afn-side-icon" aria-hidden="true">✧</span><span>Creators</span></a></div>
+  <div class="afn-side-group"><p class="afn-side-heading">BUSINESS</p><a class="afn-side-link" href="#business"><span class="afn-side-icon" aria-hidden="true">▦</span><span>Businesses</span></a><a class="afn-side-link" href="#advertise"><span class="afn-side-icon" aria-hidden="true">↗</span><span>Advertise</span></a><a class="afn-side-link" href="#contact"><span class="afn-side-icon" aria-hidden="true">⇄</span><span>Partnerships</span></a></div>
+  <div class="afn-side-group"><p class="afn-side-heading">ABOUT AFRINOVA</p><a class="afn-side-link" href="#about"><span class="afn-side-icon" aria-hidden="true">i</span><span>About Us</span></a><a class="afn-side-link" href="#contact"><span class="afn-side-icon" aria-hidden="true">✉</span><span>Contact Us</span></a></div>
+  <div class="afn-side-group">
+    <p class="afn-side-heading">QUICK DISCOVERY</p>
+    <button type="button" class="afn-discovery-btn" id="afn-side-surprise"
+      style="width:100%;margin:4px 0">🎲 Surprise Me</button>
+  </div>
+  <div class="afn-side-footer">
+    African stories. Global possibilities.<br>
+    Discover. Connect. Celebrate Africa.
+  </div>
+</aside>
+<!-- AFRINOVA 4.5 SIDEBAR END -->
+
+
+<div id="top"></div>
 
 <header>
   <a class="logo" href="#home">Afri<span>Nova</span></a>
@@ -685,10 +781,192 @@ footer { padding: 28px 6%; border-top: 1px solid #304032; color: var(--muted); f
 </section>
 <!-- AFRINOVA 3.0 PERSONALISATION END -->
 
-<section id="about">
-    <h2>Our Vision</h2>
-    <p class="muted">AfriNova is being developed as an African entertainment and media technology company. Our ambition is to connect audiences, creators and businesses through movies, series, comedy, music, documentaries, advertising and original productions.</p>
-  </section>
+
+<!-- AFRINOVA 4.0 SMART DISCOVERY START -->
+<style>
+.afn-discovery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin:22px 0}
+.afn-discovery-panel{border:1px solid rgba(255,255,255,.13);border-radius:18px;padding:20px;background:rgba(255,255,255,.035)}
+.afn-discovery-panel h3{margin-top:0}
+.afn-discovery-btn{border:0;border-radius:999px;padding:11px 17px;margin:5px 5px 5px 0;cursor:pointer;font-weight:700;background:#c7f36b;color:#142016}
+.afn-discovery-note{opacity:.78;font-size:.92rem;line-height:1.6}
+.afn-discovery-result{margin-top:14px;padding:14px;border-radius:12px;background:rgba(199,243,107,.09);line-height:1.6}
+.afn-discovery-result strong{display:block;margin-bottom:5px}
+@media(max-width:600px){.afn-discovery-grid{grid-template-columns:1fr}.afn-discovery-panel{padding:16px}.afn-discovery-btn{width:100%;margin:5px 0}}
+</style>
+<section id="smart-discovery" class="section">
+  <div class="section-heading">
+    <p class="eyebrow">AFRINOVA 4.0</p>
+    <h2>Discover Your Next Favourite</h2>
+    <p>Explore highlighted entertainment and find something new to enjoy.</p>
+  </div>
+  <div class="afn-discovery-grid">
+    <article class="afn-discovery-panel">
+      <h3>🔥 Trending on AfriNova</h3>
+      <p class="afn-discovery-note">A space for featured programmes and stories. Highlights are editorial selections, not live viewing statistics.</p>
+      <button class="afn-discovery-btn" onclick="afnDiscover('featured')">Explore Highlights</button>
+      <div id="afn-trending-result" class="afn-discovery-result" aria-live="polite">Explore featured African entertainment.</div>
+    </article>
+    <article class="afn-discovery-panel">
+      <h3>🎲 Surprise Me</h3>
+      <p class="afn-discovery-note">Let AfriNova select an available catalogue card for you.</p>
+      <button class="afn-discovery-btn" onclick="afnDiscover('random')">Surprise Me</button>
+      <div id="afn-random-result" class="afn-discovery-result" aria-live="polite">Your next discovery awaits.</div>
+    </article>
+    <article class="afn-discovery-panel">
+      <h3>⭐ Recommended for You</h3>
+      <p class="afn-discovery-note">Suggestions use saved and recently viewed information stored in this browser.</p>
+      <button class="afn-discovery-btn" onclick="afnDiscover('personal')">Find My Suggestions</button>
+      <div id="afn-personal-result" class="afn-discovery-result" aria-live="polite">Explore or save programmes to help shape your suggestions.</div>
+    </article>
+  </div>
+  <p class="afn-discovery-note">Prototype notice: these suggestions use available website cards. Real streaming, audience analytics and cross-device personalisation require further development.</p>
+</section>
+<!-- AFRINOVA 4.0 SMART DISCOVERY END -->
+
+
+<section id="about" class="section afn-about-page">
+  <div class="afn-about-wrap">
+    <p class="eyebrow">OUR STORY · OUR AMBITION</p>
+    <h2>About AfriNova</h2>
+    <p class="afn-about-lead">
+      A New Era of African Entertainment.
+      African stories. Global possibilities.
+    </p>
+
+    <div class="afn-about-intro">
+      <h3>Who We Are</h3>
+      <p>
+        AfriNova is an African entertainment and media technology platform
+        being developed to connect audiences, creators, and businesses
+        through entertainment, storytelling, culture, and creative
+        collaboration. Our ambition is to build a platform where African
+        creativity can be discovered, celebrated, and connected with
+        opportunities across the continent and around the world.
+      </p>
+      <p>
+        Africa has extraordinary cultural diversity, creative talent,
+        stories, sounds, humour, histories, and perspectives. AfriNova
+        seeks to help bring these experiences to wider audiences while
+        creating a welcoming space for people who want to discover and
+        engage with African entertainment.
+      </p>
+      <p>
+        We see entertainment as more than something people watch or hear.
+        It can preserve culture, inspire new ideas, create livelihoods,
+        bring communities together, and introduce the world to different
+        ways of seeing life.
+      </p>
+    </div>
+
+    <div class="afn-about-grid">
+      <article class="afn-about-card">
+        <span class="afn-about-number">01</span>
+        <h3>Our Mission</h3>
+        <p>
+          To develop an accessible entertainment ecosystem that helps
+          African stories and creative talent reach wider audiences,
+          while connecting creativity, technology, and business.
+        </p>
+      </article>
+
+      <article class="afn-about-card">
+        <span class="afn-about-number">02</span>
+        <h3>Our Vision</h3>
+        <p>
+          To grow into a globally recognised African entertainment
+          platform that celebrates the continent's diversity and creates
+          opportunities for audiences, creators, and partners to connect.
+        </p>
+      </article>
+
+      <article class="afn-about-card">
+        <span class="afn-about-number">03</span>
+        <h3>Our Promise</h3>
+        <p>
+          To pursue creativity with integrity, respect the rights of
+          creators, communicate honestly about our services, and build
+          AfriNova with a long-term commitment to quality and trust.
+        </p>
+      </article>
+    </div>
+
+    <div class="afn-about-intro">
+      <h3>What AfriNova Is Being Built to Offer</h3>
+      <p>
+        <strong>Movies and films:</strong> A future home for compelling
+        cinematic stories, including productions that reflect the many
+        experiences of African communities.
+      </p>
+      <p>
+        <strong>Series and episodic storytelling:</strong> Opportunities
+        to discover engaging stories, characters, and productions.
+      </p>
+      <p>
+        <strong>Comedy and entertainment:</strong> A space to celebrate
+        humour, performance, and the voices of African comedians.
+      </p>
+      <p>
+        <strong>Music and culture:</strong> A way to highlight musical
+        expression, cultural experiences, and creative traditions.
+      </p>
+      <p>
+        <strong>Documentaries:</strong> A place for stories about African
+        people, history, communities, ideas, achievements, and challenges.
+      </p>
+      <p>
+        <strong>Creators and creative businesses:</strong> A foundation
+        for creators to introduce their work and for businesses to explore
+        advertising, partnerships, and collaboration opportunities.
+      </p>
+    </div>
+
+    <div class="afn-about-intro">
+      <h3>Our Values</h3>
+      <div class="afn-about-values">
+        <div><strong>Authenticity</strong><p>Respecting the voices, experiences, and identities behind the stories.</p></div>
+        <div><strong>Creativity</strong><p>Encouraging original ideas, fresh perspectives, and artistic expression.</p></div>
+        <div><strong>Opportunity</strong><p>Working toward stronger connections between talent, audiences, and partners.</p></div>
+        <div><strong>Integrity</strong><p>Respecting intellectual property and communicating honestly with our community.</p></div>
+        <div><strong>Excellence</strong><p>Striving for quality in our platform, partnerships, and future productions.</p></div>
+        <div><strong>Global ambition</strong><p>Building from Africa with the ambition to connect with audiences worldwide.</p></div>
+      </div>
+    </div>
+
+    <div class="afn-about-intro">
+      <h3>Building for the Future</h3>
+      <p>
+        AfriNova is being developed in stages. Our current website is an
+        early platform prototype, and the entertainment catalogue,
+        creator services, and other capabilities will grow as the
+        necessary technology, partnerships, and authorised content become
+        available.
+      </p>
+      <p>
+        We believe the future of African entertainment can be shaped by
+        collaboration between storytellers, filmmakers, musicians,
+        performers, businesses, technology professionals, and audiences.
+        AfriNova's ambition is to contribute to that future through a
+        platform built around discovery, connection, and opportunity.
+      </p>
+      <p>
+        We will only distribute content that AfriNova owns or is
+        authorised to distribute. Respect for creators and their rights
+        is part of building a sustainable entertainment company.
+      </p>
+    </div>
+
+    <div class="afn-about-cta">
+      <h3>Be Part of the AfriNova Journey</h3>
+      <p>
+        Whether you are a creator, a business, a potential partner, or
+        someone who believes in the power of African stories, there is
+        room to help shape what AfriNova can become.
+      </p>
+      <a class="afn-about-button" href="#contact">Connect With AfriNova</a>
+    </div>
+  </div>
+</section>
+
 </main>
 
 
@@ -830,13 +1108,44 @@ footer { padding: 28px 6%; border-top: 1px solid #304032; color: var(--muted); f
       </p>
     </section>
 
-<footer>
-  <div class="footer-inner">
-    <div><strong>AfriNova</strong> — A New Era of African Entertainment.</div>
-    <div>Building from Africa, with the world in mind.</div>
+
+<!-- AFRINOVA FRONTEND FINISH START -->
+<footer class="afn-footer" id="afn-footer">
+  <div class="afn-footer-main">
+    <div class="afn-footer-brand">
+      <a class="afn-footer-logo" href="#top">AFRINOVA</a>
+      <p class="afn-footer-tagline">A New Era of African Entertainment.</p>
+      <p>
+        An African entertainment and media technology platform in
+        development, built around the ambition to connect stories,
+        creative talent, audiences, and businesses.
+      </p>
+      <p class="afn-footer-motto">Building from Africa, with the world in mind.</p>
+    </div>
+    <div class="afn-footer-column"><h3>EXPLORE</h3><a href="#featured">Featured Entertainment</a><a href="#smart-discovery">Smart Discovery</a><a href="#coming-soon">Coming Soon</a><a href="#my-afrinova">My AfriNova</a></div>
+<div class="afn-footer-column"><h3>FOR CREATORS & BUSINESSES</h3><a href="#creators">Creators</a><a href="#business">Businesses</a><a href="#advertise">Advertise</a></div>
+<div class="afn-footer-column"><h3>COMPANY</h3><a href="#about">About AfriNova</a><a href="#contact">Contact</a></div>
   </div>
-  <p>© <span id="year"></span> AfriNova. Brand and platform under development.</p>
+  <div class="afn-footer-bottom">
+    <p>© <span id="afn-current-year"></span> AfriNova. All rights reserved.</p>
+    <p>
+      AfriNova is a developing platform. Content is shown only where
+      authorised, and planned services may not yet be available.
+    </p>
+    <p>
+      Official email and social channels will be published here when
+      they are active and verified. For now, please use the enquiry
+      forms available on this page.
+    </p>
+  </div>
 </footer>
+<div class="afn-scroll-track" aria-hidden="true">
+  <div id="afn-scroll-progress"></div>
+</div>
+<button type="button" id="afn-back-to-top" aria-label="Back to top"
+  title="Back to top">↑</button>
+<!-- AFRINOVA FRONTEND FINISH END -->
+
 
 <script>
 const AFRINOVA_CONTACT_EMAIL = "YOUR-EMAIL@example.com";
@@ -1202,6 +1511,161 @@ function sendAfriNovaEnquiry(event, enquiryType) {
     document.addEventListener("DOMContentLoaded", start);
   } else {
     start();
+  }
+})();
+</script>
+
+
+<script id="afn-smart-discovery-js">
+(function(){
+  function readStorage(key){
+    try { return JSON.parse(localStorage.getItem(key) || "[]"); }
+    catch(e){ return []; }
+  }
+  function getCards(){
+    return Array.from(document.querySelectorAll(".card, .afn-feature-card"))
+      .filter(card => !card.closest("#my-afrinova") && !card.closest("#smart-discovery"));
+  }
+  function cardInfo(card){
+    const titleNode = card.querySelector("h2,h3,h4,.card-title");
+    const descriptionNode = card.querySelector("p");
+    return {
+      title: titleNode ? titleNode.textContent.trim() : "",
+      description: descriptionNode ? descriptionNode.textContent.trim() : "",
+      category: card.dataset.category || card.dataset.type || ""
+    };
+  }
+  function showResult(id,item,message){
+    const box = document.getElementById(id);
+    if(!box) return;
+    if(!item){ box.textContent=message; return; }
+    box.replaceChildren();
+    const title=document.createElement("strong");
+    title.textContent=item.title || "Explore AfriNova";
+    const description=document.createElement("p");
+    description.textContent=item.description || "Explore this entertainment collection on AfriNova.";
+    box.append(title,description);
+    if(item.category){
+      const category=document.createElement("span");
+      category.textContent="Category: "+item.category;
+      box.appendChild(category);
+    }
+  }
+  window.afnDiscover=function(mode){
+    const cards=getCards().map(cardInfo).filter(item=>item.title);
+    if(!cards.length){
+      const id=mode==="random"?"afn-random-result":mode==="personal"?"afn-personal-result":"afn-trending-result";
+      showResult(id,null,"No entertainment cards were found yet.");
+      return;
+    }
+    if(mode==="featured"){
+      const item=cards.find(x=>/featured|african film|spotlight|documentar|music/i.test(x.title+" "+x.description))||cards[0];
+      showResult("afn-trending-result",item,"No highlights are available yet.");
+    } else if(mode==="random"){
+      showResult("afn-random-result",cards[Math.floor(Math.random()*cards.length)],"No cards available yet.");
+    } else {
+      const saved=readStorage("afrinova_favourites_v1");
+      const recent=readStorage("afrinova_recent_v1");
+      const terms=[...saved,...recent]
+        .map(x=>String(x.title||x.name||"").toLowerCase())
+        .join(" ").split(" ").filter(x=>x.length>3);
+      const ranked=cards.map(item=>{
+        const content=(item.title+" "+item.description+" "+item.category).toLowerCase();
+        return {item,score:terms.reduce((sum,term)=>sum+(content.includes(term)?1:0),0)};
+      }).sort((a,b)=>b.score-a.score);
+      const item=ranked[0]&&ranked[0].score>0?ranked[0].item:cards[Math.floor(Math.random()*cards.length)];
+      showResult("afn-personal-result",item,"Explore or save programmes to improve your suggestions.");
+    }
+  };
+})();
+</script>
+
+
+
+<script id="afn-sidebar-js">
+(function(){
+  const menu=document.getElementById("afn-menu-trigger");
+  const panel=document.getElementById("afn-sidebar");
+  const backdrop=document.getElementById("afn-side-backdrop");
+  const closeButton=document.getElementById("afn-side-close");
+  if(!menu||!panel||!backdrop||!closeButton)return;
+
+  function openMenu(){
+    panel.classList.add("afn-open");
+    backdrop.classList.add("afn-open");
+    document.body.classList.add("afn-sidebar-active");
+    menu.setAttribute("aria-expanded","true");
+    panel.setAttribute("aria-hidden","false");
+    closeButton.focus();
+  }
+  function closeMenu(){
+    panel.classList.remove("afn-open");
+    backdrop.classList.remove("afn-open");
+    document.body.classList.remove("afn-sidebar-active");
+    menu.setAttribute("aria-expanded","false");
+    panel.setAttribute("aria-hidden","true");
+  }
+
+  menu.addEventListener("click",openMenu);
+  closeButton.addEventListener("click",closeMenu);
+  backdrop.addEventListener("click",closeMenu);
+  panel.querySelectorAll("a").forEach(link=>link.addEventListener("click",closeMenu));
+  document.addEventListener("keydown",event=>{
+    if(event.key==="Escape"&&panel.classList.contains("afn-open")){
+      closeMenu();
+      menu.focus();
+    }
+  });
+
+  const surprise=document.getElementById("afn-side-surprise");
+  if(surprise){
+    surprise.addEventListener("click",()=>{
+      closeMenu();
+      if(typeof window.afnDiscover==="function"){
+        window.afnDiscover("random");
+        const target=document.getElementById("smart-discovery");
+        if(target)target.scrollIntoView({behavior:"smooth",block:"start"});
+      } else {
+        const target=document.getElementById("featured")||
+          document.getElementById("catalogue")||
+          document.getElementById("explore");
+        if(target)target.scrollIntoView({behavior:"smooth",block:"start"});
+      }
+    });
+  }
+})();
+</script>
+
+
+
+<script id="afn-frontend-finish-js">
+(function(){
+  const year=document.getElementById("afn-current-year");
+  if(year)year.textContent=new Date().getFullYear();
+
+  const progress=document.getElementById("afn-scroll-progress");
+  const topButton=document.getElementById("afn-back-to-top");
+
+  function updateScroll(){
+    const doc=document.documentElement;
+    const max=doc.scrollHeight-doc.clientHeight;
+    const amount=max>0?(doc.scrollTop/max)*100:0;
+    if(progress)progress.style.width=amount+"%";
+    if(topButton)topButton.classList.toggle("afn-visible",doc.scrollTop>350);
+  }
+
+  window.addEventListener("scroll",updateScroll,{passive:true});
+  window.addEventListener("resize",updateScroll);
+  updateScroll();
+
+  if(topButton){
+    topButton.addEventListener("click",function(){
+      window.scrollTo({
+        top:0,
+        behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ?"auto":"smooth"
+      });
+    });
   }
 })();
 </script>
