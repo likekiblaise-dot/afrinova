@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101810">
+<meta name="description" content="AfriNova connects African entertainment, creators and audiences with the world.">
+<title>AfriNova | A New Era of African Entertainment</title>
+<style>
+:root {
+  --bg: #101810;
+  --panel: #19241b;
+  --green: #a6e36f;
+  --gold: #f4c66a;
+  --text: #f7f7f0;
+  --muted: #b6c0b4;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+a { color: inherit; text-decoration: none; }
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 6%;
+  border-bottom: 1px solid #304032;
+  flex-wrap: wrap;
+}
+.logo { font-size: 27px; font-weight: 800; letter-spacing: 1px; }
+.logo span { color: var(--green); }
+nav { display: flex; gap: 20px; flex-wrap: wrap; }
+nav a { color: var(--muted); font-size: 14px; }
+nav a:hover { color: var(--green); }
+.hero {
+  padding: 75px 7% 65px;
+  background: radial-gradient(ellipse at 85% 15%, #354a2c 0%, transparent 48%), linear-gradient(135deg,#17251a,#101810 70%);
+}
+.badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border: 1px solid #526a43;
+  border-radius: 30px;
+  color: var(--green);
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+h1 { max-width: 750px; font-size: clamp(38px,7vw,72px); line-height: 1.08; margin: 22px 0; }
+h1 span { color: var(--green); }
+.hero p { max-width: 620px; color: var(--muted); font-size: 17px; }
+.buttons { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+.button {
+  display: inline-block;
+  padding: 12px 20px;
+  border-radius: 7px;
+  font-weight: bold;
+  background: var(--green);
+  color: #14200f;
+  border: 1px solid var(--green);
+  cursor: pointer;
+}
+.button.secondary { background: transparent; color: var(--text); border-color: #526052; }
+section { padding: 42px 6%; }
+.section-heading { display: flex; align-items: center; justify-content: space-between; gap: 15px; flex-wrap: wrap; }
+h2 { font-size: 27px; margin: 0 0 8px; }
+.muted { color: var(--muted); }
+.categories { display: flex; gap: 10px; flex-wrap: wrap; margin: 24px 0; }
+.chip {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid #39483a;
+  border-radius: 24px;
+  padding: 9px 16px;
+  cursor: pointer;
+}
+.chip.active, .chip:hover { background: var(--green); color: #14200f; }
+.search { width: 100%; max-width: 380px; padding: 12px 14px; border-radius: 7px; border: 1px solid #465346; background: #172019; color: white; font-size: 15px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(210px,1fr)); gap: 18px; margin-top: 20px; }
+.card { background: var(--panel); border: 1px solid #2d3a2f; border-radius: 12px; overflow: hidden; }
+.art {
+  height: 145px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg,#344b2c,#17281c);
+  color: var(--green);
+  font-size: 40px;
+}
+.card-content { padding: 16px; }
+.card h3 { margin: 0 0 5px; font-size: 18px; }
+.card p { margin: 0; color: var(--muted); font-size: 14px; }
+.label { display: inline-block; font-size: 11px; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 7px; }
+.notice { margin-top: 20px; padding: 15px; background: #202c20; border-left: 3px solid var(--gold); color: var(--muted); font-size: 14px; }
+.feature-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(230px,1fr)); gap: 18px; margin-top: 22px; }
+.feature { padding: 24px; border: 1px solid #334234; background: var(--panel); border-radius: 12px; }
+.feature .icon { font-size: 29px; }
+.feature h3 { margin: 8px 0; }
+.cta { background: linear-gradient(110deg,#243a22,#18251a); border: 1px solid #40543b; border-radius: 14px; padding: 30px; }
+footer { padding: 28px 6%; border-top: 1px solid #304032; color: var(--muted); font-size: 13px; }
+.footer-inner { display: flex; justify-content: space-between; gap: 15px; flex-wrap: wrap; }
+.empty { color: var(--muted); padding: 20px 0; }
+@media(max-width:600px) {
+  header { padding: 15px 5%; }
+  nav { gap: 13px; }
+  .hero { padding: 55px 6%; }
+  section { padding: 32px 5%; }
+  .logo { font-size: 23px; }
+}
+
+    /* AfriNova advertising section */
+    .advertise-cta {
+      margin-top: 32px;
+      padding: 32px;
+      border: 1px solid rgba(190, 255, 96, 0.3);
+      border-radius: 22px;
+      background: rgba(190, 255, 96, 0.07);
+      text-align: center;
+    }
+    .advertise-cta h3 {
+      margin-top: 0;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+    }
+    .advertise-cta p {
+      line-height: 1.7;
+    }
+    .advertise-cta .small-note {
+      font-size: 0.85rem;
+      opacity: 0.7;
+      margin-top: 18px;
+    }
+    .button {
+      display: inline-block;
+      padding: 13px 20px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      margin-top: 10px;
+    }
+    .button-primary {
+      background: #c6ff68;
+      color: #142015;
+    }
+    
+
+    .enquiry-layout {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+      gap: 22px;
+      margin-top: 32px;
+      align-items: start;
+    }
+    .enquiry-panel {
+      padding: 24px;
+      border: 1px solid rgba(190, 255, 96, 0.22);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.035);
+      scroll-margin-top: 30px;
+    }
+    .enquiry-panel h3 {
+      margin-top: 0;
+      line-height: 1.4;
+    }
+    .enquiry-panel p {
+      line-height: 1.7;
+    }
+    .enquiry-panel form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .enquiry-panel label {
+      font-weight: 600;
+      margin-top: 8px;
+    }
+    .enquiry-panel input,
+    .enquiry-panel select,
+    .enquiry-panel textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: #17251d;
+      color: inherit;
+      font: inherit;
+    }
+    .enquiry-panel textarea {
+      resize: vertical;
+    }
+    .enquiry-panel button {
+      font: inherit;
+      cursor: pointer;
+      border: 0;
+      align-self: flex-start;
+    }
+    .enquiry-notice {
+      margin-top: 24px;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      opacity: 0.75;
+    }
+    
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="#home">Afri<span>Nova</span></a>
+  <nav aria-label="Main navigation">
+    <a href="#explore">Explore</a>
+    <a href="#creators">Creators</a>
+    <a href="#business">Businesses</a>
+    <a href="#advertise">Advertise</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <span class="badge">African stories. Global possibilities.</span>
+    <h1>A New Era of <span>African Entertainment.</span></h1>
+    <p>Discover the stories, sounds, laughter and creativity of Africa. AfriNova is building a home for entertainment, creators and businesses to connect with audiences across the world.</p>
+    <div class="buttons">
+      <a class="button" href="#explore">Explore Entertainment ↓</a>
+      <a class="button secondary" href="#creators">Join Our Journey</a>
+    </div>
+  </section>
+
+  <section id="explore">
+    <div class="section-heading">
+      <div>
+        <h2>Explore AfriNova</h2>
+        <div class="muted">A world of African entertainment in one place.</div>
+      </div>
+      <input class="search" id="search" type="search" placeholder="Search categories..." aria-label="Search entertainment categories">
+    </div>
+
+    <div class="categories" id="categories">
+      <button class="chip active" data-category="All">All</button>
+      <button class="chip" data-category="Movies">Movies</button>
+      <button class="chip" data-category="Series">Series</button>
+      <button class="chip" data-category="Comedy">Comedy</button>
+      <button class="chip" data-category="Music">Music</button>
+      <button class="chip" data-category="Documentaries">Documentaries</button>
+    </div>
+
+    <div class="grid" id="catalogue">
+      <article class="card" data-category="Movies">
+        <div class="art">🎬</div>
+        <div class="card-content"><span class="label">Movies</span><h3>African Cinema</h3><p>Discover films and stories from across Africa.</p></div>
+      </article>
+      <article class="card" data-category="Series">
+        <div class="art">📺</div>
+        <div class="card-content"><span class="label">Series</span><h3>Stories in Episodes</h3><p>Explore drama, family stories and original series.</p></div>
+      </article>
+      <article class="card" data-category="Comedy">
+        <div class="art">😂</div>
+        <div class="card-content"><span class="label">Comedy</span><h3>African Laughter</h3><p>Comedy sketches, performances and funny stories.</p></div>
+      </article>
+      <article class="card" data-category="Music">
+        <div class="art">🎵</div>
+        <div class="card-content"><span class="label">Music</span><h3>Music & Performances</h3><p>Discover artists, live shows and music stories.</p></div>
+      </article>
+      <article class="card" data-category="Documentaries">
+        <div class="art">🌍</div>
+        <div class="card-content"><span class="label">Documentaries</span><h3>Real African Stories</h3><p>Explore culture, history, innovation and people.</p></div>
+      </article>
+    </div>
+    <div class="notice">AfriNova is under development. These are category previews, not playable programmes. We will add videos when suitable content and distribution permissions are secured.</div>
+  </section>
+
+  <section id="creators">
+    <h2>For African Creators</h2>
+    <p class="muted">Are you a filmmaker, comedian, musician or documentary producer? We want to hear from people creating stories worth sharing.</p>
+    <div class="feature-grid">
+      <div class="feature"><div class="icon">🎥</div><h3>Share Your Work</h3><p class="muted">Explore future opportunities to distribute your work through AfriNova.</p></div>
+      <div class="feature"><div class="icon">🌟</div><h3>Reach New Audiences</h3><p class="muted">Help us build a platform connecting African creativity with viewers around the world.</p></div>
+      <div class="feature"><div class="icon">🤝</div><h3>Build Partnerships</h3><p class="muted">We aim to develop fair, transparent relationships with content creators.</p></div>
+    </div>
+  </section>
+
+  <section id="business">
+    <div class="cta">
+      <h2>For Businesses & Brands</h2>
+      <p class="muted">Looking for creative advertising, promotional videos or future entertainment partnerships? AfriNova aims to connect businesses with African creativity and audiences.</p>
+      <p>Business services are part of our planned development. Contact and enquiry features will be added in a later stage.</p>
+    </div>
+  </section>
+
+  
+    <section id="advertise" class="section">
+      <div class="section-heading">
+        <span class="eyebrow">GROW WITH AFRINOVA</span>
+        <h2>Advertise with AfriNova</h2>
+        <p>
+          Put your brand in front of audiences who love African entertainment.
+          Promote your business, product, event, music release, or service.
+        </p>
+      </div>
+
+      <div class="creator-grid">
+        <article class="creator-card">
+          <div class="card-icon">📢</div>
+          <h3>Business Advertising</h3>
+          <p>Help customers discover your company, shop, products, and services.</p>
+        </article>
+
+        <article class="creator-card">
+          <div class="card-icon">🎬</div>
+          <h3>Video Promotions</h3>
+          <p>Showcase your brand through promotional videos and creative campaigns.</p>
+        </article>
+
+        <article class="creator-card">
+          <div class="card-icon">🎵</div>
+          <h3>Music & Events</h3>
+          <p>Promote music releases, concerts, festivals, and other events.</p>
+        </article>
+      </div>
+
+      <div class="advertise-cta">
+        <h3>Ready to put your brand in the spotlight?</h3>
+        <p>Contact AfriNova to discuss advertising opportunities and future campaign packages.</p>
+        <a class="button button-primary"
+           href="mailto:advertising@afrinova.com?subject=AfriNova%20Advertising%20Enquiry">
+          Enquire About Advertising
+        </a>
+        <p class="small-note">
+          Advertising packages and availability will be confirmed by AfriNova.
+        </p>
+      </div>
+    </section>
+
+    <section id="about">
+    <h2>Our Vision</h2>
+    <p class="muted">AfriNova is being developed as an African entertainment and media technology company. Our ambition is to connect audiences, creators and businesses through movies, series, comedy, music, documentaries, advertising and original productions.</p>
+  </section>
+</main>
+
+
+    <section id="contact" class="section">
+      <div class="section-heading">
+        <span class="eyebrow">LET'S BUILD TOGETHER</span>
+        <h2>Connect with AfriNova</h2>
+        <p>
+          Are you a creator, business owner, filmmaker, musician, advertiser,
+          or potential partner? We want to hear from you.
+        </p>
+      </div>
+
+      <div class="creator-grid">
+        <article class="creator-card">
+          <div class="card-icon">🎬</div>
+          <h3>Join as a Creator</h3>
+          <p>
+            Are you a filmmaker, actor, musician, comedian, or content creator?
+            Tell us about your work and your interest in AfriNova.
+          </p>
+          <a class="button button-primary" href="#creator-enquiry">
+            Express Interest
+          </a>
+        </article>
+
+        <article class="creator-card">
+          <div class="card-icon">📢</div>
+          <h3>Advertise Your Business</h3>
+          <p>
+            Promote your products, services, events, or brand through
+            AfriNova's future advertising opportunities.
+          </p>
+          <a class="button button-primary" href="#business-enquiry">
+            Business Enquiry
+          </a>
+        </article>
+
+        <article class="creator-card">
+          <div class="card-icon">🤝</div>
+          <h3>Partner with Us</h3>
+          <p>
+            Interested in collaborating with an emerging African
+            entertainment and media technology company?
+          </p>
+          <a class="button button-primary" href="#partner-enquiry">
+            Partnership Enquiry
+          </a>
+        </article>
+      </div>
+
+      <div class="enquiry-layout">
+        <div class="enquiry-panel" id="creator-enquiry">
+          <h3>Creator Registration of Interest</h3>
+          <p>Introduce yourself and tell us what you create.</p>
+          <form onsubmit="sendAfriNovaEnquiry(event, 'Creator Registration')">
+            <label for="creator-name">Full name</label>
+            <input id="creator-name" name="name" required maxlength="100" placeholder="Your full name">
+
+            <label for="creator-email">Email address</label>
+            <input id="creator-email" name="email" type="email" required maxlength="150" placeholder="you@example.com">
+
+            <label for="creator-country">Country</label>
+            <input id="creator-country" name="country" required maxlength="100" placeholder="Your country">
+
+            <label for="creator-type">What do you create?</label>
+            <select id="creator-type" name="creator type" required>
+              <option value="">Choose a category</option>
+              <option>Films and movies</option>
+              <option>Acting</option>
+              <option>Series and drama</option>
+              <option>Comedy</option>
+              <option>Music</option>
+              <option>Documentaries</option>
+              <option>Digital content</option>
+              <option>Other</option>
+            </select>
+
+            <label for="creator-message">Tell us about your work</label>
+            <textarea id="creator-message" name="message" required maxlength="2000" rows="4" placeholder="Describe your work and how you would like to collaborate."></textarea>
+
+            <button class="button button-primary" type="submit">Prepare Creator Enquiry</button>
+          </form>
+        </div>
+
+        <div class="enquiry-panel" id="business-enquiry">
+          <h3>Business & Advertising Enquiry</h3>
+          <p>Tell us about your business and what you want to promote.</p>
+          <form onsubmit="sendAfriNovaEnquiry(event, 'Business and Advertising Enquiry')">
+            <label for="business-name">Your name</label>
+            <input id="business-name" name="name" required maxlength="100" placeholder="Your full name">
+
+            <label for="business-company">Business or organisation</label>
+            <input id="business-company" name="business" required maxlength="150" placeholder="Business name">
+
+            <label for="business-email">Email address</label>
+            <input id="business-email" name="email" type="email" required maxlength="150" placeholder="you@example.com">
+
+            <label for="business-country">Country</label>
+            <input id="business-country" name="country" required maxlength="100" placeholder="Your country">
+
+            <label for="business-service">What are you interested in?</label>
+            <select id="business-service" name="service" required>
+              <option value="">Choose a service</option>
+              <option>Business advertising</option>
+              <option>Promotional video production</option>
+              <option>Music or event promotion</option>
+              <option>Brand sponsorship</option>
+              <option>Business partnership</option>
+              <option>Other</option>
+            </select>
+
+            <label for="business-message">Tell us what you need</label>
+            <textarea id="business-message" name="message" required maxlength="2000" rows="4" placeholder="Describe your campaign, product, event, or proposal."></textarea>
+
+            <button class="button button-primary" type="submit">Prepare Business Enquiry</button>
+          </form>
+        </div>
+
+        <div class="enquiry-panel" id="partner-enquiry">
+          <h3>Partnership Enquiry</h3>
+          <p>
+            For organisations, investors, distributors, media companies,
+            and other potential partners.
+          </p>
+          <p>
+            Prepare a partnership enquiry using the business form and select
+            "Business partnership" as the service.
+          </p>
+          <a class="button button-primary" href="#business-enquiry">
+            Contact AfriNova
+          </a>
+        </div>
+      </div>
+
+      <p class="enquiry-notice">
+        AfriNova is developing its services. Submitting an enquiry does not
+        guarantee acceptance, advertising placement, payment, or a partnership.
+      </p>
+    </section>
+
+<footer>
+  <div class="footer-inner">
+    <div><strong>AfriNova</strong> — A New Era of African Entertainment.</div>
+    <div>Building from Africa, with the world in mind.</div>
+  </div>
+  <p>© <span id="year"></span> AfriNova. Brand and platform under development.</p>
+</footer>
+
+<script>
+const buttons = document.querySelectorAll('.chip');
+const cards = document.querySelectorAll('.card');
+const search = document.getElementById('search');
+let activeCategory = 'All';
+
+function filterCards() {
+  const query = search.value.toLowerCase().trim();
+  let visible = 0;
+  cards.forEach(card => {
+    const category = card.dataset.category;
+    const matchesCategory = activeCategory === 'All' || category === activeCategory;
+    const matchesSearch = card.textContent.toLowerCase().includes(query);
+    const show = matchesCategory && matchesSearch;
+    card.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  let empty = document.getElementById('empty-message');
+  if (!empty) {
+    empty = document.createElement('p');
+    empty.id = 'empty-message';
+    empty.className = 'empty';
+    document.getElementById('catalogue').after(empty);
+  }
+  empty.textContent = visible ? '' : 'No categories found. Try another search.';
+}
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    buttons.forEach(item => item.classList.remove('active'));
+    button.classList.add('active');
+    activeCategory = button.dataset.category;
+    filterCards();
+  });
+});
+search.addEventListener('input', filterCards);
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+    <script>
+const AFRINOVA_CONTACT_EMAIL = "YOUR-EMAIL@example.com";
+
+function sendAfriNovaEnquiry(event, enquiryType) {
+  event.preventDefault();
+
+  if (AFRINOVA_CONTACT_EMAIL === "YOUR-EMAIL@example.com") {
+    alert("AfriNova's contact email has not been configured yet. Please check back soon.");
+    return;
+  }
+
+  const form = event.target;
+  const data = new FormData(form);
+  const lines = [];
+
+  for (const [key, value] of data.entries()) {
+    lines.push(key + ": " + value);
+  }
+
+  const subject = "AfriNova - " + enquiryType;
+  const body = lines.join("\n");
+  const mailto = "mailto:" + AFRINOVA_CONTACT_EMAIL
+    + "?subject=" + encodeURIComponent(subject)
+    + "&body=" + encodeURIComponent(body);
+
+  window.location.href = mailto;
+}
+</script>
+
+</body>
+</html>
